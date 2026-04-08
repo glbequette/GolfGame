@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1825bd84e8f1a2b4581a905f9ffa1a16, type: 3}
+  m_Name: CourseDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::CourseDatabase
+  allCourses:
+  - courseName: Home Course
+    holePrefabs:
+    - {fileID: 5215473708151468946, guid: 6cf65e4d8422f5f41957b0b2d4db2916, type: 3}
+    - {fileID: 9127889556155007470, guid: c6004201264cc7340912fa110c0c36e0, type: 3}
+    - {fileID: 6573094559175917310, guid: f8dda4c15dafc6044bb78c3e01a58c34, type: 3}
+    - {fileID: 4210615626319422440, guid: ec36906af20c6b549aba2fbd6279e01b, type: 3}
+    - {fileID: 425751725516091627, guid: 2de08349d575c1448aea7b2ce1f0fdf2, type: 3}
+    - {fileID: 8404285017869387757, guid: 0a779c8b328f22a40b429698a20fa189, type: 3}
+    - {fileID: 7049961376525390418, guid: 16a109bc8cc7a4c4e8812a68162ab215, type: 3}
+    - {fileID: 2820019712912701351, guid: 56a183cd711d94544943a7c03a1a7337, type: 3}
+    - {fileID: 2464510672510169216, guid: aefb6a6012eb9ee44a8ed6f271930a4e, type: 3}
+    - {fileID: 6640502102335067588, guid: 0c23895543ef08647aa334e2ebaecbb0, type: 3}
+    - {fileID: 7737522627945656235, guid: 13cf21c56c2f04b43bc7c5f29c519d77, type: 3}
+    - {fileID: 7499063381042290113, guid: eb276cc983325e047985f9a549d6e4b5, type: 3}
+    - {fileID: 2101478055719220671, guid: 3795455c9dbdd1c4383e0b30648f340c, type: 3}
+    - {fileID: 7624015083867665723, guid: a39974f98a3f00c40b39f8cc3bdff167, type: 3}
+    - {fileID: 95139311905980203, guid: 362adb6290618c24bae92c1f23779c21, type: 3}
+    - {fileID: 4750105131914438428, guid: a32271c38470ab142bc227de9f60214f, type: 3}
+    - {fileID: 2490662626493362991, guid: 520149efa632e164dbfa18e1355de413, type: 3}
+    - {fileID: 1511407988372691348, guid: 4c5a25379020ace4584a18d5f5e13e39, type: 3}
+    courseSprite: {fileID: -5148049006044050641, guid: b0e57277794560444b7924f594cd2b96, type: 3}
+  - courseName: Silverado
+    holePrefabs:
+    - {fileID: 1511407988372691348, guid: 4c5a25379020ace4584a18d5f5e13e39, type: 3}
+    courseSprite: {fileID: 266208438182404516, guid: fddff505665a32840a6f3ead2c367235, type: 3}
