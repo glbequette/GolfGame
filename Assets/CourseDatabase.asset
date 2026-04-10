@@ -34,7 +34,14 @@ MonoBehaviour:
     - {fileID: 2490662626493362991, guid: 520149efa632e164dbfa18e1355de413, type: 3}
     - {fileID: 1511407988372691348, guid: 4c5a25379020ace4584a18d5f5e13e39, type: 3}
     courseSprite: {fileID: -5148049006044050641, guid: b0e57277794560444b7924f594cd2b96, type: 3}
-  - courseName: Silverado
+  - courseName: Augusta National
     holePrefabs:
-    - {fileID: 1511407988372691348, guid: 4c5a25379020ace4584a18d5f5e13e39, type: 3}
+    - {fileID: 2490662626493362991, guid: b72acf499f0c5fa428136317ed1c0b6a, type: 3}
+    - {fileID: 4932021272860276316, guid: 26a073f7fcff715498c7379a69986486, type: 3}
+    - {fileID: 8714065096832850948, guid: 3be2e481a43205c4a8bd99dcdec59ce0, type: 3}
+    - {fileID: 2355856122230057034, guid: de1e23a34e54c6546bcc282d590835d2, type: 3}
+    - {fileID: 2094582452447976095, guid: dc16e8ccd895527408781cf9c1bd0b11, type: 3}
+    - {fileID: 3414583908351552409, guid: c8ac5d2332dd2d34da2e280681182f97, type: 3}
+    - {fileID: 6356241067008034338, guid: 34b61de1c7b7ccc488a3c68991d8d2d8, type: 3}
+    - {fileID: 6781033338076165594, guid: 8e0b2b6886e7ae449b204b3df1b34343, type: 3}
     courseSprite: {fileID: 266208438182404516, guid: fddff505665a32840a6f3ead2c367235, type: 3}
