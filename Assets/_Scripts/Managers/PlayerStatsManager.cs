@@ -8,6 +8,7 @@ public class LifetimeStatsData
     public int totalEagles = 0;
     public int totalBirdies = 0;
     public int totalPars = 0;
+    public int money = 0;
 
     // We use a List of a custom class instead of a Dictionary so Unity can serialize it to JSON
     public List<CourseRecord> courseRecords = new List<CourseRecord>();

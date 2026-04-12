@@ -128,6 +128,8 @@ public class LevelManager : MonoBehaviour
             holeParText.text = $"Par {data.par}";
             holeDistanceText.text = $"{data.yards} Yards";
         }
+
+        ball.ResetForNewHole();
     }
 
     public void ProcessHoleScore(int par, int strokes)
@@ -185,7 +187,12 @@ public class LevelManager : MonoBehaviour
 
         // 5. Move to the next hole and load the shop
         currentHoleIndex++;
-        SceneManager.LoadScene("Shop");
+        //SceneManager.LoadScene("Shop");
+        if (currentSpawnedHole != null)
+        {
+            Destroy(currentSpawnedHole);
+        }
+        SpawnCurrentHole();
     }
 
     public void OnRunCompleted(string courseID, int totalRunScore)

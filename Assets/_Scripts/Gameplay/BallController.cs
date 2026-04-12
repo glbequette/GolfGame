@@ -185,6 +185,29 @@ public class BallController : MonoBehaviour
         }
     }
 
+    public void ResetForNewHole()
+    {
+        // 1. Turn off the locks so the player can swing again!
+        isMoving = false;
+
+        // (If you have an isSinking variable, make sure to reset it here too)
+        isSinking = false; 
+
+        // 2. Reset physics variables
+        currentHeight = 0f;
+        verticalVelocity = 0f;
+
+        // 3. Reset the stroke count
+        strokesTaken = 0;
+        UpdateStrokeUI();
+
+        // 4. Force the swing manager back to Idle just in case
+        if (swingManager != null)
+        {
+            swingManager.ResetSwingState();
+        }
+    }
+
     void HandleClubSwitching()
     {
         if (availableClubs.Length == 0) return;
