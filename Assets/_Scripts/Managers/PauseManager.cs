@@ -6,6 +6,8 @@ public class PauseManager : MonoBehaviour
 {
     [Header("UI References")]
     public UISlider pauseMenuSlider; // Change this from GameObject to our new script!
+    public LevelManager levelManager;
+    public SwingManager swingManager;
 
     public static bool isPaused = false;
     public string mainMenuSceneName = "MainMenu";
@@ -19,7 +21,7 @@ public class PauseManager : MonoBehaviour
             {
                 ResumeGame();
             }
-            else
+            else if (swingManager.currentState != SwingManager.SwingState.SettingAccuracy && swingManager.currentState != SwingManager.SwingState.SettingPower)
             {
                 PauseGame();
             }
@@ -42,6 +44,8 @@ public class PauseManager : MonoBehaviour
 
     public void ExitToMainMenu()
     {
+        if (levelManager != null)
+            LevelManager.currentHoleIndex = 0;
         Time.timeScale = 1f;
         isPaused = false;
         SceneManager.LoadScene(mainMenuSceneName);

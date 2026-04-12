@@ -56,9 +56,7 @@ public class LevelManager : MonoBehaviour
     {
         GolfCourse currentCourse = allCourses[selectedCourseIndex];
 
-
-        // --- NEW: Create a blank scorecard for this specific course length! ---
-        if (playerScores == null || playerScores.Length != currentCourse.holePrefabs.Length)
+        if (currentHoleIndex == 0 || playerScores == null || playerScores.Length != currentCourse.holePrefabs.Length)
         {
             playerScores = new int[currentCourse.holePrefabs.Length];
         }
@@ -185,4 +183,5 @@ public class LevelManager : MonoBehaviour
     {
         PlayerStatsManager.Instance.UpdateCourseBestScore(courseID, totalRunScore);
     }
+
 }

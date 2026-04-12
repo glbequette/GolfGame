@@ -6623,6 +6623,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenuSlider: {fileID: 974421257}
+  levelManager: {fileID: 1869438324}
+  swingManager: {fileID: 1311838964}
   mainMenuSceneName: MainMenu
 --- !u!4 &974421256
 Transform:
@@ -8330,7 +8332,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &1311838960
 SpriteRenderer:

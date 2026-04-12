@@ -79,7 +79,7 @@ public class BallController : MonoBehaviour
 
     public Color aimLineColor = Color.white; // Simplified since power is handled by UI now
 
-    private bool isMoving = false;
+    public bool isMoving = false;
     private bool isSplashing = false;
     public bool isSinking = false;
 
@@ -169,18 +169,6 @@ public class BallController : MonoBehaviour
             if (!isDrivingRange)
             {
                 UpdateDistanceUI(); // Normal game targeting
-            }
-            else
-            {
-                // --- NEW: Driving Range Quick Reset Hotkey ---
-                // Press 'R' on keyboard or 'Y/Triangle' on Gamepad to reset!
-                bool keyboardReset = Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame;
-                bool gamepadReset = Gamepad.current != null && Gamepad.current.buttonNorth.wasPressedThisFrame;
-
-                if (keyboardReset || gamepadReset)
-                {
-                    ResetToTee();
-                }
             }
         }
     }
@@ -277,10 +265,18 @@ public class BallController : MonoBehaviour
             powerLevel = 1f + 0.05f * clubData.level;
         }
 
+        float baseDistanceInUnits = (currentClub.estimatedDistanceYards * powerLevel) / yardsPerUnit;
 
-
-            // 1. Convert the club's estimated yards into Unity Units
-            float baseDistanceInUnits = (currentClub.estimatedDistanceYards * powerLevel) / yardsPerUnit;
+        if (sandTouches >= 1)
+        {
+            baseDistanceInUnits *= currentClub.sandPenaltyMultiplier;
+        }
+        else if (roughTouches >= 1)
+        {
+            baseDistanceInUnits *=  currentClub.roughPenaltyMultiplier;
+        }
+        
+            
 
         float upgradedVisualDistance = baseDistanceInUnits;
 

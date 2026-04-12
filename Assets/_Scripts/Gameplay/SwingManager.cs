@@ -41,6 +41,13 @@ public class SwingManager : MonoBehaviour
             HandleActionInput();
         }
 
+        // Cancel Swing
+        if (Mouse.current.rightButton.wasPressedThisFrame || Keyboard.current.leftShiftKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame )
+        {
+            CancelSwing();
+        }
+
+
         AnimateMeters();
     }
 
@@ -134,5 +141,28 @@ public class SwingManager : MonoBehaviour
         accuracySlider.value = 0f;
         powerSlider.value = 0f;
         powerDirection = 1;
+    }
+
+    public void CancelSwing()
+    {
+        // Only allow canceling if they are actively in the middle of a swing
+        if (currentState == SwingState.SettingAccuracy)
+        {
+            // 1. Put the brain back to Idle
+            currentState = SwingState.Idle;
+
+            // 2. Reset the visual sliders so they are ready for the next attempt
+            if (accuracySlider != null) accuracySlider.value = 0f; // (Or whatever your default starting value is)
+            if (powerSlider != null) powerSlider.value = 0f;
+
+
+            powerDirection = 1; 
+
+
+            swingMeterPanel.SetActive(false);
+            mainGameplayUI.SetActive(true);
+
+            Debug.Log("Swing Cancelled! Back to aiming.");
+        }
     }
 }
