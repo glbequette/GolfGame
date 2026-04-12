@@ -29,21 +29,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("Starting a new run...");
 
-        // --- THE ROGUELIKE RESET ---
-        // We must wipe the player's static stats clean so they don't carry over from a previous death/win!
-        LevelManager.currentMoney = 0;
-        LevelManager.globalAccuracyMultiplier = 1f;
-        LevelManager.globalPowerMultiplier = 1f;
-        LevelManager.globalHazardBonus = 0f;
-        LevelManager.globalIncomeMultiplier = 1f;
-
-        // Reset the shop prices back to their default starting costs
-        ShopManager.powerCost = 50;
-        ShopManager.accuracyCost = 50;
-        ShopManager.hazardCost = 50;
-        ShopManager.incomeCost = 50;
 
         SceneManager.LoadScene("CourseSelection");
     }

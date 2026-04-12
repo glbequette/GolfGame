@@ -85,18 +85,6 @@ public class CourseSelectManager : MonoBehaviour
     // Called by the Play Button
     public void PlaySelectedCourse()
     {
-        // 1. Reset the roguelike economy
-        LevelManager.currentMoney = 0;
-        LevelManager.globalAccuracyMultiplier = 1f;
-        LevelManager.globalPowerMultiplier = 1f;
-        LevelManager.globalHazardBonus = 0f;
-        LevelManager.globalIncomeMultiplier = 1f;
-
-        ShopManager.powerCost = 50;
-        ShopManager.accuracyCost = 50;
-        ShopManager.hazardCost = 50;
-        ShopManager.incomeCost = 50;
-
         // --- THE NEW ARCHITECTURE ---
         // 2. Tell the LevelManager which course index we are looking at in the UI
         LevelManager.selectedCourseIndex = currentIndex;

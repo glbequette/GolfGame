@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Hole
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
   m_sharedMaterial: {fileID: 6414438427950987489, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 143340329}
   - component: {fileID: 143340330}
   m_Layer: 5
-  m_Name: UpgradePower
+  m_Name: UpgradeDriver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Upgrade
 
-    Power'
+    Driver'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
   m_sharedMaterial: {fileID: 6414438427950987489, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 216166912}
   - component: {fileID: 216166911}
   m_Layer: 5
-  m_Name: AccuracyCostText
+  m_Name: IronCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 297299726}
   - component: {fileID: 297299725}
   m_Layer: 5
-  m_Name: HazardCostText
+  m_Name: WedgeCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 385419542}
   - component: {fileID: 385419543}
   m_Layer: 5
-  m_Name: PowerCostText
+  m_Name: DriverCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 657459411}
   - component: {fileID: 657459410}
   m_Layer: 5
-  m_Name: EconomyCostText
+  m_Name: PutterCostText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1210,7 +1210,7 @@ GameObject:
   - component: {fileID: 810570928}
   - component: {fileID: 810570927}
   m_Layer: 5
-  m_Name: NextHoleButton
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,16 +1280,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1148647288}
-        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: GoToNextHole
-        m_Mode: 1
+      - m_Target: {fileID: 1414220656}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: LoadSpecificScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &810570928
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 921273191}
   - component: {fileID: 921273190}
   m_Layer: 5
-  m_Name: UpgradeHazard
+  m_Name: UpgradeWedge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1389,7 +1389,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Upgrade
 
-    Escapability'
+    Wedge'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
   m_sharedMaterial: {fileID: 6414438427950987489, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
@@ -1715,12 +1715,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
   walletText: {fileID: 792642972}
-  powerButtonText: {fileID: 385419543}
-  accuracyButtonText: {fileID: 216166911}
-  hazardButtonText: {fileID: 297299725}
-  incomeButtonText: {fileID: 657459410}
-  upgradeAmount: 0.02
-  gameplaySceneName: GolfCourse
+  driverButtonText: {fileID: 385419543}
+  ironButtonText: {fileID: 216166911}
+  wedgeButtonText: {fileID: 297299725}
+  putterButtonText: {fileID: 657459410}
 --- !u!4 &1148647289
 Transform:
   m_ObjectHideFlags: 0
@@ -1749,7 +1747,7 @@ GameObject:
   - component: {fileID: 1318536432}
   - component: {fileID: 1318536431}
   m_Layer: 5
-  m_Name: AccuracyButton
+  m_Name: IronButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1822,7 +1820,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1148647288}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: BuyAccuracyUpgrade
+        m_MethodName: UpgradeIron
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1942,6 +1940,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385483163}
   m_CullTransparentMesh: 1
+--- !u!1 &1414220655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414220657}
+  - component: {fileID: 1414220656}
+  m_Layer: 0
+  m_Name: MenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1414220656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414220655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f8f65f2043bf14da65aace969ed1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+--- !u!4 &1414220657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414220655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 448.28625, y: 249.55591, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540615891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1997,7 @@ GameObject:
   - component: {fileID: 1540615894}
   - component: {fileID: 1540615893}
   m_Layer: 5
-  m_Name: HazardButton
+  m_Name: WedgeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2028,7 +2070,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1148647288}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: BuyHazardUpgrade
+        m_MethodName: UpgradeWedge
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2161,7 +2203,7 @@ GameObject:
   - component: {fileID: 1615410244}
   - component: {fileID: 1615410243}
   m_Layer: 5
-  m_Name: UpgradeAccuracy
+  m_Name: UpgradeIron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2189,7 +2231,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Upgrade
 
-    Accuracy'
+    Iron'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
   m_sharedMaterial: {fileID: 6414438427950987489, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
@@ -2300,7 +2342,7 @@ GameObject:
   - component: {fileID: 1630641353}
   - component: {fileID: 1630641352}
   m_Layer: 5
-  m_Name: UpgradeEconomy
+  m_Name: UpgradePutter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2347,7 +2389,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Upgrade
 
-    Economy'
+    Putter'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
   m_sharedMaterial: {fileID: 6414438427950987489, guid: e92543e4ff153e0488d41a295a64ecc5, type: 2}
@@ -2440,7 +2482,7 @@ GameObject:
   - component: {fileID: 1981240233}
   - component: {fileID: 1981240232}
   m_Layer: 5
-  m_Name: EconomyButton
+  m_Name: PutterButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,7 +2555,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1148647288}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: BuyIncomeUpgrade
+        m_MethodName: UpgradePutter
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2574,7 +2616,7 @@ GameObject:
   - component: {fileID: 2072542000}
   - component: {fileID: 2072541999}
   m_Layer: 5
-  m_Name: PowerButton
+  m_Name: DriverButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2647,7 +2689,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1148647288}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: BuyPowerUpgrade
+        m_MethodName: UpgradeDriver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2703,3 +2745,4 @@ SceneRoots:
   - {fileID: 447072117}
   - {fileID: 1131335842}
   - {fileID: 1148647289}
+  - {fileID: 1414220657}

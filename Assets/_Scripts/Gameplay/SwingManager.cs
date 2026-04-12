@@ -15,8 +15,8 @@ public class SwingManager : MonoBehaviour
     public Slider powerSlider;
 
     [Header("Meter Speeds")]
-    public float accuracySpeed = 2f;    // How fast the horizontal bar moves
-    public float powerSpeed = 1.5f;     // How fast the vertical bar moves
+    public float accuracySpeed = 5f;    // How fast the horizontal bar moves
+    public float powerSpeed = 5f;     // How fast the vertical bar moves
 
     [Header("Golf Ball & Physics")]
     public BallController ballController; // <-- NEW: Swap Rigidbody2D for BallController!
@@ -57,7 +57,7 @@ public class SwingManager : MonoBehaviour
 
             case SwingState.SettingAccuracy:
                 // 2. Lock Accuracy, immediately start Power
-                finalAccuracy = accuracySlider.value;
+                finalAccuracy = -accuracySlider.value;
                 currentState = SwingState.SettingPower;
                 break;
 
@@ -71,27 +71,35 @@ public class SwingManager : MonoBehaviour
 
     void AnimateMeters()
     {
-        // --- NEW: Ask the BallController for the current club's multiplier! ---
-        float clubSpeedMultiplier = 1f;
+        float finalMeterSpeedMultiplier = 1f;
+
         if (ballController != null && ballController.GetCurrentClub() != null)
         {
-            clubSpeedMultiplier = ballController.GetCurrentClub().meterSpeedMultiplier;
+            GolfClub currentClub = ballController.GetCurrentClub();
+            float baseSpeed = currentClub.meterSpeedMultiplier;
+
+            if (PlayerStatsManager.Instance != null)
+            {
+                ClubSaveData clubData = PlayerStatsManager.Instance.GetClubStats(currentClub.clubName);
+                
+                // Example: Each level slows the meter down by 4%
+                float speedReduction = 1.0f - (clubData.level * 0.04f);
+                
+                // Clamp it so the meter never completely freezes!
+                speedReduction = Mathf.Max(0.2f, speedReduction); 
+                
+                finalMeterSpeedMultiplier = baseSpeed * speedReduction;
+            }
         }
-
-        // Apply the multiplier to your base speeds
-        float finalAccuracySpeed = accuracySpeed * clubSpeedMultiplier;
-        float finalPowerSpeed = powerSpeed * clubSpeedMultiplier;
-
 
         if (currentState == SwingState.SettingAccuracy)
         {
-            // Use the new finalAccuracySpeed
-            accuracySlider.value = Mathf.PingPong(Time.time * finalAccuracySpeed, 2f) - 1f;
+            accuracySlider.value = Mathf.PingPong(Time.time * (accuracySpeed * finalMeterSpeedMultiplier), 2f) - 1f;
         }
         else if (currentState == SwingState.SettingPower)
         {
             // Use the new finalPowerSpeed
-            powerSlider.value += finalPowerSpeed * powerDirection * Time.deltaTime;
+            powerSlider.value += powerSpeed * powerDirection * finalMeterSpeedMultiplier * Time.deltaTime;
 
             if (powerSlider.value >= 1f)
             {
@@ -101,7 +109,7 @@ public class SwingManager : MonoBehaviour
             else if (powerSlider.value <= 0f && powerDirection == -1)
             {
                 powerSlider.value = 0f;
-                finalPower = 0f;
+                finalPower = 0.1f;
                 HitBall();
             }
         }
@@ -116,10 +124,7 @@ public class SwingManager : MonoBehaviour
         // --- UPDATED: Talk directly to the ballController reference! ---
         if (ballController != null)
         {
-            if (finalPower < 0.1f)
-                ballController.ExecuteShotFromMinigame(0.1f, finalAccuracy);
-            else
-                ballController.ExecuteShotFromMinigame(finalPower, finalAccuracy);
+            ballController.ExecuteShotFromMinigame(finalPower, finalAccuracy);
         }
     }
 

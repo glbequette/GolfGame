@@ -9,13 +9,13 @@ public class GolfClub
 {
     public string clubName;
     public Sprite clubCardImage;
-    public float maxPower;
     public float powerModifier;
     public float maxVarianceAngle;
     public float loft;
     public float roughPenaltyMultiplier = 1f;
     public float sandPenaltyMultiplier = 1f;
     public float meterSpeedMultiplier = 1.0f;
+    
 
     // --- NEW: Designer-friendly distance stat ---
     [Tooltip("Roughly how many yards this club hits at 100% power")]
@@ -270,11 +270,19 @@ public class BallController : MonoBehaviour
 
         GolfClub currentClub = availableClubs[currentClubIndex];
 
-        // 1. Convert the club's estimated yards into Unity Units
-        float baseDistanceInUnits = currentClub.estimatedDistanceYards / yardsPerUnit;
+        float powerLevel = 1f;
+        if (PlayerStatsManager.Instance != null)
+        {
+            ClubSaveData clubData = PlayerStatsManager.Instance.GetClubStats(currentClub.clubName);
+            powerLevel = 1f + 0.05f * clubData.level;
+        }
 
-        // 2. Multiply it by the Roguelike Shop upgrades
-        float upgradedVisualDistance = baseDistanceInUnits * LevelManager.globalPowerMultiplier;
+
+
+            // 1. Convert the club's estimated yards into Unity Units
+            float baseDistanceInUnits = (currentClub.estimatedDistanceYards * powerLevel) / yardsPerUnit;
+
+        float upgradedVisualDistance = baseDistanceInUnits;
 
         float rotationInput = 0f;
 
@@ -340,8 +348,27 @@ public class BallController : MonoBehaviour
     {
         GolfClub club = availableClubs[currentClubIndex];
 
+
+        float powerMultiplier = 1.0f;
+        float accuracyMultiplier = 1.0f;
+
+        // 3. Fetch the specific upgrades for THIS club!
+        if (PlayerStatsManager.Instance != null)
+        {
+            ClubSaveData clubData = PlayerStatsManager.Instance.GetClubStats(club.clubName);
+
+            // Example: Each level adds 5% more distance
+            powerMultiplier = 1.0f + (clubData.level * 0.05f);
+
+            // Example: Each level shrinks the random variance angle by 5%
+            accuracyMultiplier = 1.0f - (clubData.level * 0.05f);
+
+            // (Make sure accuracy multiplier never goes below 0!)
+            accuracyMultiplier = Mathf.Max(0.1f, accuracyMultiplier);
+        }
+
         // 1. Calculate final accuracy (accuracyMeterValue is between -1 and 1)
-        float upgradedVariance = club.maxVarianceAngle * LevelManager.globalAccuracyMultiplier;
+        float upgradedVariance = club.maxVarianceAngle * accuracyMultiplier;
         float actualAngleOffset = accuracyMeterValue * upgradedVariance;
 
         // 2. Calculate direction based on where we aimed + the meter's mistake
@@ -363,15 +390,15 @@ public class BallController : MonoBehaviour
         float hazardMultiplier = 1f;
         if (sandTouches > 0)
         {
-            hazardMultiplier = Mathf.Min(1f, club.sandPenaltyMultiplier + LevelManager.globalHazardBonus);
+            hazardMultiplier = Mathf.Min(1f, club.sandPenaltyMultiplier);
         }
         else if (roughTouches > 0)
         {
-            hazardMultiplier = Mathf.Min(1f, club.roughPenaltyMultiplier + LevelManager.globalHazardBonus);
+            hazardMultiplier = Mathf.Min(1f, club.roughPenaltyMultiplier);
         }
 
         // 5. Apply the final physical force
-        float finalForce = club.maxPower * finalPowerPercentage * club.powerModifier * LevelManager.globalPowerMultiplier * hazardMultiplier;
+        float finalForce = 7 * finalPowerPercentage * powerMultiplier * club.powerModifier * hazardMultiplier;
 
         Shoot(finalDirection * finalForce);
     }

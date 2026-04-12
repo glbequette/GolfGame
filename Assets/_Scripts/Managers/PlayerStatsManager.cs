@@ -2,13 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 [System.Serializable]
+
+public class ClubSaveData
+{
+    public string clubName;
+    public int level = 0;
+
+    // A constructor to easily create new ones
+    public ClubSaveData(string name)
+    {
+        clubName = name;
+    }
+}
+
+[System.Serializable]
 public class LifetimeStatsData
 {
     public int totalHoleInOnes = 0;
     public int totalEagles = 0;
     public int totalBirdies = 0;
     public int totalPars = 0;
-    public int money = 0;
+    public int wallet = 0;
+
+    public List<ClubSaveData> clubUpgrades = new List<ClubSaveData>();
 
     // We use a List of a custom class instead of a Dictionary so Unity can serialize it to JSON
     public List<CourseRecord> courseRecords = new List<CourseRecord>();
@@ -63,6 +79,41 @@ public class PlayerStatsManager : MonoBehaviour
     public void AddEagle() { currentStats.totalEagles++; SaveStats(); }
     public void AddBirdie() { currentStats.totalBirdies++; SaveStats(); }
     public void AddPar() { currentStats.totalPars++; SaveStats(); }
+
+    public void AddMoney(int amount)
+    {
+        currentStats.wallet += amount;
+        SaveStats(); // Instantly writes the new balance to the hard drive!
+    }
+
+    public void RemoveMoney(int amount)
+    {
+        currentStats.wallet -= amount;
+        SaveStats();
+    }
+
+    public ClubSaveData GetClubStats(string targetClubName)
+    {
+        // 1. Search the list for this specific club
+        ClubSaveData data = currentStats.clubUpgrades.Find(c => c.clubName == targetClubName);
+
+        // 2. If we didn't find it, they must have just unlocked it!
+        if (data == null)
+        {
+            data = new ClubSaveData(targetClubName);
+            currentStats.clubUpgrades.Add(data);
+            SaveStats(); // Save this new club to the hard drive
+        }
+
+        return data;
+    }
+
+    public void UpgradeClub(string targetClubName)
+    {
+        ClubSaveData data = currentStats.clubUpgrades.Find(c => c.clubName == targetClubName);
+        data.level += 1;
+        SaveStats();
+    }
 
     // --- COURSE RECORD LOGIC ---
 
@@ -149,6 +200,11 @@ public class PlayerStatsManager : MonoBehaviour
             LifetimeStatsData newData = new LifetimeStatsData();
             newData.playerName = newName;
 
+            newData.clubUpgrades.Add(new ClubSaveData("Driver"));
+            newData.clubUpgrades.Add(new ClubSaveData("Iron"));
+            newData.clubUpgrades.Add(new ClubSaveData("Wedge"));
+            newData.clubUpgrades.Add(new ClubSaveData("Putter"));
+
             string newJson = JsonUtility.ToJson(newData, true);
             File.WriteAllText(path, newJson);
 
@@ -216,6 +272,11 @@ public class PlayerStatsManager : MonoBehaviour
             // Optional: Give it a default name like "Player 1", "Player 2", etc.
             currentStats.playerName = "Golfer " + (profileIndex + 1);
             Debug.Log($"Created new blank save for Profile {profileIndex + 1}.");
+
+            currentStats.clubUpgrades.Add(new ClubSaveData("Driver"));
+            currentStats.clubUpgrades.Add(new ClubSaveData("Iron"));
+            currentStats.clubUpgrades.Add(new ClubSaveData("Wedge"));
+            currentStats.clubUpgrades.Add(new ClubSaveData("Putter"));
         }
     }
 

@@ -158,8 +158,8 @@ MonoBehaviour:
   swingMeterPanel: {fileID: 1866843042}
   accuracySlider: {fileID: 1697874148}
   powerSlider: {fileID: 697112684}
-  accuracySpeed: 2
-  powerSpeed: 1.5
+  accuracySpeed: 4
+  powerSpeed: 2.5
   ballController: {fileID: 168575830}
   maxHitForce: 800
   maxShotAngle: 45
@@ -181,29 +181,26 @@ MonoBehaviour:
   availableClubs:
   - clubName: Driver
     clubCardImage: {fileID: 2822211633497888043, guid: 6aa1e7897c21c3043a9af9adce274509, type: 3}
-    maxPower: 7
     powerModifier: 6
-    maxVarianceAngle: 30
+    maxVarianceAngle: 45
     loft: 9
     roughPenaltyMultiplier: 0.6
     sandPenaltyMultiplier: 0.3
-    meterSpeedMultiplier: 2
+    meterSpeedMultiplier: 1
     estimatedDistanceYards: 220
   - clubName: Iron
     clubCardImage: {fileID: 1729293032157742666, guid: 6aa1e7897c21c3043a9af9adce274509, type: 3}
-    maxPower: 7
     powerModifier: 3.8
-    maxVarianceAngle: 25
+    maxVarianceAngle: 45
     loft: 15
     roughPenaltyMultiplier: 0.8
     sandPenaltyMultiplier: 0.5
-    meterSpeedMultiplier: 1.5
+    meterSpeedMultiplier: 1
     estimatedDistanceYards: 150
   - clubName: Wedge
     clubCardImage: {fileID: 7544851754826846479, guid: 6aa1e7897c21c3043a9af9adce274509, type: 3}
-    maxPower: 7
     powerModifier: 2
-    maxVarianceAngle: 20
+    maxVarianceAngle: 45
     loft: 21
     roughPenaltyMultiplier: 1
     sandPenaltyMultiplier: 0.9
@@ -211,14 +208,13 @@ MonoBehaviour:
     estimatedDistanceYards: 85
   - clubName: Putter
     clubCardImage: {fileID: 3317513159738812400, guid: 6aa1e7897c21c3043a9af9adce274509, type: 3}
-    maxPower: 7
     powerModifier: 1.8
-    maxVarianceAngle: 15
+    maxVarianceAngle: 45
     loft: 0
     roughPenaltyMultiplier: 0.1
     sandPenaltyMultiplier: 0.1
-    meterSpeedMultiplier: 0.5
-    estimatedDistanceYards: 30
+    meterSpeedMultiplier: 1
+    estimatedDistanceYards: 40
   clubImageDisplay: {fileID: 1360817699}
   rb: {fileID: 168575833}
   stopThreshold: 0.1

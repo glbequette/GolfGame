@@ -38,23 +38,9 @@ public class LevelManager : MonoBehaviour
     public static int currentHoleIndex = 0;
     public static int currentMoney = 0;
 
-    // NEW: Upgrade Multipliers!
-    // 1.0 is normal. 1.10 is a 10% boost. 0.90 is a 10% reduction.
-    public static float globalPowerMultiplier = 1.0f;
-    public static float globalAccuracyMultiplier = 1.0f;
-
-    // Adds a flat percentage back to your hazard penalty (0.10f = +10% power)
-    public static float globalHazardBonus = 0f;
-
-    // Multiplies your end-of-hole cash (1.20f = 20% more money)
-    public static float globalIncomeMultiplier = 1.0f;
-
     private GameObject currentSpawnedHole;
 
     public ScorecardManager scorecardManager;
-
-
-
 
 
     void Start()
@@ -182,17 +168,17 @@ public class LevelManager : MonoBehaviour
         else moneyEarned = 5;                    // Double Bogey or worse
 
         // 4. Add it to the permanent wallet
-        currentMoney += Mathf.RoundToInt(moneyEarned * globalIncomeMultiplier);
+        PlayerStatsManager.Instance.AddMoney(moneyEarned);
         Debug.Log($"You shot a {score}! Earned ${moneyEarned}. Total Wallet: ${currentMoney}");
 
         // 5. Move to the next hole and load the shop
         currentHoleIndex++;
-        //SceneManager.LoadScene("Shop");
         if (currentSpawnedHole != null)
         {
             Destroy(currentSpawnedHole);
         }
         SpawnCurrentHole();
+
     }
 
     public void OnRunCompleted(string courseID, int totalRunScore)
