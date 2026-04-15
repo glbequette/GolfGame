@@ -11,11 +11,13 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Profile Panels")]
     public GameObject[] profilePanels;
+    public GameObject confirmPanel;
 
     [Header("Button Text")]
     public TextMeshProUGUI[] profileNameTexts;
     public TextMeshProUGUI[] profileLoadTexts;
     public TextMeshProUGUI[] profileDeleteTexts;
+    public TextMeshProUGUI confirmDeleteText;
 
     private bool isConfirmingDelete = false;
 
@@ -119,14 +121,15 @@ public class MainMenuManager : MonoBehaviour
             isConfirmingDelete = true;
             string playerName = PlayerStatsManager.Instance.GetProfileName(profileIndex);
 
-            if (profileNameTexts[profileIndex] != null)
+            if (confirmDeleteText != null)
             {
-                profileNameTexts[profileIndex].text = "Delete " + playerName + "?";
-                profileNameTexts[profileIndex].color = Color.red;
+                confirmDeleteText.text = "Delete " + playerName + "?";
+                confirmDeleteText.color = Color.red;
 
-                // Optional: You can also change the text color to red here to make it obvious!
-                // currentProfileText.color = Color.red; 
+ 
             }
+
+            confirmPanel.SetActive(true);
         }
         else
         {
@@ -140,11 +143,10 @@ public class MainMenuManager : MonoBehaviour
             // Turn off the warning state
             isConfirmingDelete = false;
 
-            // Optional: If you changed the color to red above, change it back to white/black here!
-            // if (currentProfileText != null) currentProfileText.color = Color.white;
 
             // Refresh the UI to show the newly wiped empty slot
             UpdateButtonNames();
+            confirmPanel.SetActive(true);
         }
     }
 
@@ -153,6 +155,7 @@ public class MainMenuManager : MonoBehaviour
         if (isConfirmingDelete)
         {
             isConfirmingDelete = false;
+            confirmPanel.SetActive(false);
 
         }
         UpdateButtonNames();
